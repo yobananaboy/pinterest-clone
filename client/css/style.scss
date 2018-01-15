@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+$black: #212121;
+$palegreen: #a5d6a7;
+$blue: #3d5afe;
+$red: #d32f2f;
+$mediumgreen: #81c784;
+$backgroundgreen: #4caf50;
+$peach: #ffe0c5;
+$orange: #ff3d00;
+$yellow: #fff59d;
+$lightgrey: #f5f5f5;
+$mediumgrey: #9e9e9e;
+$grey: #757575;
+$white: #fafafa;
+ 
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    background-color: $backgroundgreen;
+    box-sizing: border-box
+}
+.show {
+    display: block;
+}
+a {
+    cursor: pointer;
+}
+// TOP NAV
+.nav-wrapper {
+    background-color: $palegreen;
+}
+.nav-mobile {
+    display: none;
+}
+.nav-wide {
+    padding: 0.5em 0;
+}
+.nav {
+    width: 1000px;
+    margin: 0 auto 10px auto;
+    font-size: 1.5em;
+    a{
+        color: $black;
+        text-decoration: none;
+        &:active {
+            color: $peach;
+        }
+        &.active {
+            color: $orange;
+        }
+    }
+}
+.nav-links {
+    a {
+        margin-left: 20px;
+    }
+    float: right;
+    display: inline-block;
+}
+// ADD NEW POST FORM
+.add-post-form-wrapper {
+    width: 60%;
+    margin: 0 auto;
+    background-color: $lightgrey;
+    border-radius: 3px;
+    padding: 1em 2em;
+}
+label {
+    margin-top: 1em;
+    display: inline-block;
+    width: 15%;
+}
+.form-group {
+    margin-bottom: 0.5em;
+}
+input {
+    border-radius: 3px;
+    border: solid 2px $mediumgrey;
+    background-color: $white;
+    width: 35%;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+input:focus {
+    border: solid 2px $yellow;
+}
+input:invalid {
+    border: solid 2px $red;
+}
+.add-post-button {
+    margin-top: 2em;
+    border-radius: 3px;
+    border: none;
+    background-color: $orange;
+    color: $white;
+    display: none;
+    padding: 0.4em;
+    &.show {
+        display: block;
+    }
+    &:active {
+        transform: translateY(2px);
+    }
+}
+.error-message {
+    color: $red;
+}
+// POST GALLERY
+.post-gallery {
+    margin: 0 auto;
+    width: 80%;
+}
+img {
+    max-width: 100%;
+}
+.post {
+    width: 19%;
+    cursor: default;
+    margin: 0.2em;
+    padding: 0.2em;
+    border-radius: 3px;
+    background-color: $white;
+    &:hover {
+        background-color: $yellow;
+    }
+}
+.post-title {
+    font-weight: bold;
+}
+.delete-restore-container {
+    clear: both;
+    margin: 0.3em 0;
+}
+.delete-button {
+    color: $red;
+    &:active {
+        color: $white;
+    }
+}
+.restore-button {
+    color: $blue;
+    &:active {
+        color: $white;
+    }
+}
+.twitter-img-container {
+    float: left;
+    margin-right: 1em;
+}
+.twitter-img {
+    border-radius: 3px;
+}
+.like {
+    float: right;
+    margin-right: 1em;
+    color: $white;
+    padding: 1em 0;
+}
+.like-details {
+    background-color: $black;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    text-align: center;
+    width: 3em;
+    a:active {
+        background-color: $grey;
+    }
+}
+// FOOTER
+.footer {
+    text-align: center;
+}
+// MOBILE
+@media screen and (max-width: 999px) {
+    // TOP NAV
+    .nav {
+        width: 100%;
+        font-size: 1em;
+    }
+    .nav-wide {
+        display: none;
+    }
+    .nav-mobile {
+        padding: 0.5em 0.4em;
+        display: block;
+    }
+    .mobile-links {
+        display: none;
+        width: 100%;
+        &.show {
+            display: inline-block;
+        }
+    }
+    .nav-links {
+        width: 100%;
+        float: left;
+        a {
+            display: block;
+            margin-left: 0px;
+            margin-top: 1em;
+        }
+    }
+    #burger {
+        padding-left: 40px;
+        float: right;
+    }
+    // ADD NEW POST FORM
+    .add-post-form-wrapper {
+        width: 100%;    
+    }
+    label {
+        display: block;
+        width: 60%;
+    }
+    input {
+        margin-top: 1em;
+        display: block;
+        width: 60%;
+    }
+    // POST GALLERY
+    .post-gallery {
+        margin: 0 auto;
+        width: 100%;
+    }
+    img {
+        max-width: 100%;
+    }
+    .post {
+        width: 45%;
+        margin-left: 2%;
+    }
+}
