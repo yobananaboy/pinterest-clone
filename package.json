@@ -64,6 +64,6 @@
     "webpack": "^3.10.0"
   },
   "scripts": {
-    "start": "babel-node server.js set NODE_ENV=production"
+    "start": "server.js"
   }
 }
