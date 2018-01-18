@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { renderRoutes } from 'react-router-config';
 import Header from './Header';
 import { Footer } from './Footer';
 
 import { getPosts, addNewPost, deleteRestorePost, likePost, sendNewPostHasErrorredMessage } from '../actions/posts';
 import { checkUserLoggedIn } from '../actions/user';
 
-import AddPost from './Posts/AddPost';
-import ViewPosts from './Posts/ViewPosts';
-import { Error404 } from './Posts/Error404';
-
 class App extends Component {
     constructor(props) {
         super(props);
-    }    
+    }
+    
+    static getData(store) {
+       return store.dispatch(getPosts());
+    }
     
     componentDidMount() {
         this.props.checkUserLoggedIn();
@@ -25,17 +25,21 @@ class App extends Component {
         return(
             <div>
                 <Header {...this.props} />
-                    <Switch>
-                        <Route exact path='/' render = {(props) => (<ViewPosts {...this.props} postsToDisplay='all' />)} />
-                        <Route exact path='/user/posts' render = {(props) => (<ViewPosts {...this.props} postsToDisplay='user' />)} />
-                        <Route exact path='/add' render = {(props) => (<AddPost {...this.props} />)} />
-                        <Route path='*' component={Error404} />
-                    </Switch>
+                    {renderRoutes(this.props.route.routes, {...this.props})}
                 <Footer />
             </div>
             );
     }
 }
+//{renderRoutes(this.props.route.routes)}
+/*
+<Switch>
+    <Route exact path='/' render = {(props) => (<ViewPosts {...this.props} postsToDisplay='all' />)} />
+    <Route exact path='/user/posts' render = {(props) => (<ViewPosts {...this.props} postsToDisplay='user' />)} />
+    <Route exact path='/add' render = {(props) => (<AddPost {...this.props} />)} />
+    <Route path='*' component={Error404} />
+</Switch>
+*/
 
 const mapStateToProps = (state) => {
     return {
@@ -60,6 +64,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, null, {
-  pure: false
-})(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

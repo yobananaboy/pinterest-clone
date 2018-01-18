@@ -1,9 +1,16 @@
-require("babel-core/register");
+require('babel-register')({
+    presets: ["env", "react", "stage-2", "es2015"],
+    plugins: ["transform-class-properties"]
+});
+
 require('dotenv').config();
+
 var http = require('http');
 var path = require('path');
 
 var express = require('express');
+
+// var router = require('./server/routes/router');
 
 var session = require('express-session');
 var passport = require('passport');
@@ -11,6 +18,8 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 
 var app = express();
+
+app.engine('pug', require('pug').__express)
 
 // Initialize Passport session
 app.use(session({
@@ -24,19 +33,15 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static('public'));
+app.use('/public', express.static('public'));
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
+app.set('views', './views');
+app.set('view engine', 'ejs');
 
 var server = http.createServer(app);
 
-require('./server/routes/routes')(app, passport);
+// app.use('/', router);
+require('./server/routes/routes')(app, passport, express);
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();

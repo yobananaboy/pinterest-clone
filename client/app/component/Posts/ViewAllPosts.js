@@ -6,7 +6,7 @@ var masonryOptions = {
     transitionDuration: 700
 };
 
-class ViewPosts extends Component {
+class ViewAllPosts extends Component {
     constructor(props) {
         super(props);
     }
@@ -14,18 +14,12 @@ class ViewPosts extends Component {
     render() {
         // get display to know whether you are showing all posts or user's posts
         let display = this.props.postsToDisplay;
-        // create post list to add posts to
         let postList = [];
         // loop through posts and add posts to post list depending on display
         this.props.posts.forEach((post, index) => {
-            // if display is all, just display all active posts
-            if(display === 'all' && post.active) {
-                postList.push(<Post {...this.props} post={post} key={index} />);
-            } else if(display === 'user') {
-                // if display is set to user's posts, display all user posts
-                if(this.props.user._id === post.idOfPoster) {
-                    postList.push(<Post {...this.props} post={post} key={index} />);
-                }
+            if(post.active) {
+                // display all active posts
+                postList.push(<Post {...this.props} post={post} key={index} />);    
             }
         });
         // posts will show as loading by default
@@ -61,4 +55,4 @@ class ViewPosts extends Component {
     }
 }
 
-export default ViewPosts;
+export default ViewAllPosts;

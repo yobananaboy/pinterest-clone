@@ -1,8 +1,24 @@
 import { Posts } from '../../config/database';
 import mongoose from 'mongoose';
 
+import { postsUpdated } from '../../../client/app/actions/posts';
+
+import React, { Component } from 'react';
+import { renderToString } from 'react-dom/server';
+
+import StaticRouter from 'react-router-dom/StaticRouter';
+import { renderRoutes } from 'react-router-config';
+
+import configureStore from '../../../client/app/store/configureStore';
+
+import { Provider } from 'react-redux';
+import routes from '../../../client/app/routes/routes';
+
+const store = configureStore();
+
 // find all posts
 exports.get_all_posts = function(req, res) {
+    console.log('getting posts');
     // find all posts on database
     Posts.find({}, function(err, posts) {
         // handle error
@@ -131,4 +147,27 @@ exports.like_post = function(req, res) {
             });
         });
     });
+};
+
+exports.render_server_data = function(req, res) {
+        Posts.find({}, function(err, posts) {
+            // handle error
+            if(err) {
+                console.log(err);
+            }
+            store.dispatch(postsUpdated(posts));
+            let data = store.getState();
+            let context = {};
+            const content = renderToString(
+              <Provider store={store}>
+                <StaticRouter location={req.url} context={context}>
+                  {renderRoutes(routes)}
+                </StaticRouter>
+              </Provider>
+            );
+            if(context.status === 404) {
+              res.status(404);
+            }
+            res.render('index', {title: 'Express', data: JSON.stringify(data), content });
+        });
 };

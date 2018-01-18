@@ -119,10 +119,10 @@ class AddPost extends Component {
                     <form onSubmit={this.handleSubmit} className="add-post-form">
                         <p>Please provide an image url and (optional) caption to post your image.</p>
                     	<div class="form-group">
-                		    <label>Image URL *</label> <input class="add-post-input" name="url" type="text" value={this.state.url} id="url-input" onChange={this.handleChange} placeholder="Please provide a url" />
+                		    <label>Image URL *</label> <input className="add-post-input" name="url" type="text" value={this.state.url} id="url-input" onChange={this.handleChange} placeholder="Please provide a url" />
                         </div>
                         <div class="form-group">
-                		    <label>Caption</label> <input class="add-post-input" name="caption" type="text" value={this.state.caption} maxlength="30" id="caption-input" onChange={this.handleChange} placeholder="Please provide a caption" />
+                		    <label>Caption</label> <input className="add-post-input" name="caption" type="text" value={this.state.caption} maxlength="30" id="caption-input" onChange={this.handleChange} placeholder="Please provide a caption" />
                         </div>
                         {errorMessage}
                         <button className={buttonClass} type="submit">Add post</button>

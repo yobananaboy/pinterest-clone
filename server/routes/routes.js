@@ -1,7 +1,8 @@
 import user_controller from './controllers/userController';
 import posts_controller from './controllers/postsController';
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, express) {
+    
     // route for twitter authentication and login
     app.get('/auth/twitter', passport.authenticate('twitter'));
     
@@ -29,8 +30,5 @@ module.exports = function(app, passport) {
     // like a post
     app.post('/like-post', posts_controller.like_post);
     
-    app.get('/*', (req, res) => {
-        res.sendfile('public/index.html');
-    });
+    app.get('*', posts_controller.render_server_data);
 };
-

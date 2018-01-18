@@ -95,7 +95,8 @@ img {
   margin: 0.2em;
   padding: 0.2em;
   border-radius: 3px;
-  background-color: #fafafa; }
+  background-color: #fafafa;
+  float: left; }
   .post:hover {
     background-color: #fff59d; }
 
@@ -139,6 +140,30 @@ img {
     background-color: #757575; }
 
 .footer {
+  clear: both;
+  text-align: center; }
+
+.loader {
+  border: 16px solid #fafafa;
+  border-top: 16px solid #ff3d00;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  animation: spin 1.5s linear infinite;
+  color: transparent; }
+
+.loader:after {
+  content: ''; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.not-found {
+  color: #fafafa;
   text-align: center; }
 
 @media screen and (max-width: 999px) {

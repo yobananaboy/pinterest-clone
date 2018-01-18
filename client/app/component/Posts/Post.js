@@ -41,7 +41,7 @@ class Post extends Component {
             }
         }
         let likeEmoji = "👍";
-        let likeDetails =    <span class="like-details">
+        let likeDetails =    <span className="like-details">
                                 {likeEmoji}   {this.props.post.likes.length}
                              </span>;
         // if user logged in, let them like and unlike posts
