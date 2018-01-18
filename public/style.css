@@ -97,8 +97,6 @@ img {
   border-radius: 3px;
   background-color: #fafafa;
   float: left; }
-  .post:hover {
-    background-color: #fff59d; }
 
 .post-title {
   font-weight: bold; }
@@ -136,7 +134,7 @@ img {
   border-radius: 3px;
   text-align: center;
   width: 3em; }
-  .like-details a:active {
+  .like-details.user-logged-in:hover {
     background-color: #757575; }
 
 .footer {

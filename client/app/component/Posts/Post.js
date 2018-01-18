@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import emoji from 'react-easy-emoji';
+import classNames from 'classnames';
 
 class Post extends Component {
     constructor(props) {
@@ -48,10 +49,11 @@ class Post extends Component {
         if(this.props.post.likes.indexOf(this.props.user._id) !== -1) {
             likeEmoji = "✌️";
         }
+        let likeDetailsClass = classNames('like-details', {'user-logged-in': this.props.user});
         if(this.props.user) {
             likeDetails = 
                         
-                            <a onClick={this.handleClick} className="like-details" id="like">
+                            <a onClick={this.handleClick} className={likeDetailsClass} id="like">
                                 {emoji(`${likeEmoji}   ${this.props.post.likes.length}`)}
                             </a>;
         }
@@ -78,39 +80,3 @@ class Post extends Component {
 }
 
 export default Post;
-/*
-export const Post = (props) => {
-    
-    // add delete/restore button for user to delete or restore their posts
-    let deleteRestoreButton;
-    // if user logged in and user is post owner, let user delete or restore a post
-    if(props.user._id === props.post.idOfPoster) {
-        // if post is active, let user delete
-        if(props.post.active) {
-            deleteRestoreButton = <a href="/delete-restore-post" class="delete-button">Delete post</a>;
-        } else {
-            deleteRestoreButton = <a href="/delete-restore-post" class="restore-button">Restore post</a>; // else, display restore button
-        }
-    }
-    // delete restore error message if user has tried to delete a post and failed
-    let deleteRestoreMessage;
-    // check if there is an error message
-    if(props.deleteRestoreHasErrored) {
-        // then make sure error message matches this post before displaying
-        if(props.deleteRestoreHasErrored.post._id === props.post._id) {
-            deleteRestoreMessage = <p className="error-message">{props.deleteRestoreHasErrored.message}</p>;
-        }
-    }
-   return (
-        <div className="post">
-            <img src={props.post.img} alt={props.post.caption} />
-            <p className="post-title"><img src={props.post.posterImg} />{props.post.caption}</p>
-            <p><span className="post-title">Posted by:</span> {props.post.usernameOfPoster}</p>
-            {deleteRestoreButton}
-            {deleteRestoreMessage}
-        </div>
-       );
-    
-    
-};
-*/

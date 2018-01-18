@@ -121,9 +121,6 @@ img {
     border-radius: 3px;
     background-color: $white;
     float: left;
-    &:hover {
-        background-color: $yellow;
-    }
 }
 .post-title {
     font-weight: bold;
@@ -163,7 +160,7 @@ img {
     border-radius: 3px;
     text-align: center;
     width: 3em;
-    a:active {
+    &.user-logged-in:hover {
         background-color: $grey;
     }
 }
