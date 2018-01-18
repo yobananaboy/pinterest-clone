@@ -1,5 +1,4 @@
 import axios from 'axios';
-import imageType from 'image-type';
 
 const getPostsUrl = '/get-all-posts';
 const addNewPostUrl = '/add-new-post';
@@ -7,32 +6,8 @@ const deleteRestorePostUrl = '/delete-restore-post';
 const likePostUrl = '/like-post';
 
 export const getPosts = () => {
-    console.log('spud');
     return(dispatch) => {
         dispatch(sendPostsAreLoading(true));
-        /*
-        const request = axios.get(getPostsUrl);
-        
-        return request.then(
-            res => {
-                dispatch(sendPostsAreLoading(false));
-                if(res.data.success) {
-                    console.log('success');
-                    dispatch(postsUpdated(res.data.posts));
-                }
-                if(res.data.err) {
-                    console.log('fail1');
-                    dispatch(sendPostsHaveErroredMessage('Could not get posts. Please try again by refreshing your page.'));
-                }
-            },
-            err => {
-                if(err) {
-                    console.log('fail2');
-                    dispatch(sendPostsAreLoading(false));
-                    dispatch(sendPostsHaveErroredMessage('Could not get posts. Please try again by refreshing your page.'));   
-                }
-            }
-            );*/
           axios.get(getPostsUrl)
             .then(res => {
                 dispatch(sendPostsAreLoading(false));
