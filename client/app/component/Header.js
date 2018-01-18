@@ -18,7 +18,6 @@ class Header extends Component {
 		});
 	}
 	
-	// https://codepen.io/carloluis/pen/gWzPzd
 	render() {
 		let navlinks = <div className="nav-links">
 							<a href="/auth/twitter">{emoji("Log in 🐦 ")}</a>
