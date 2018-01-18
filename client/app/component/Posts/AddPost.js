@@ -3,7 +3,7 @@ import validator from 'validator';
 import classNames from 'classnames';
 import { Redirect } from 'react-router-dom';
 
-const placeholderLink = '/images/placeholder.png';
+const placeholderLink = '/public/images/placeholder.png';
 
 class AddPost extends Component {
     constructor(props) {
