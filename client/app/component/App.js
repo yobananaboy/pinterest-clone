@@ -31,15 +31,6 @@ class App extends Component {
             );
     }
 }
-//{renderRoutes(this.props.route.routes)}
-/*
-<Switch>
-    <Route exact path='/' render = {(props) => (<ViewPosts {...this.props} postsToDisplay='all' />)} />
-    <Route exact path='/user/posts' render = {(props) => (<ViewPosts {...this.props} postsToDisplay='user' />)} />
-    <Route exact path='/add' render = {(props) => (<AddPost {...this.props} />)} />
-    <Route path='*' component={Error404} />
-</Switch>
-*/
 
 const mapStateToProps = (state) => {
     return {
