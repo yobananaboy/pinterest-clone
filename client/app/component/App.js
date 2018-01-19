@@ -18,7 +18,9 @@ class App extends Component {
     
     componentDidMount() {
         this.props.checkUserLoggedIn();
-        this.props.getPosts();
+        if(!this.props.posts) {
+            this.props.getPosts();    
+        }
     }
     
     render() {
