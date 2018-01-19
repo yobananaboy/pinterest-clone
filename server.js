@@ -36,7 +36,6 @@ app.set('view engine', 'ejs');
 
 var server = http.createServer(app);
 
-// app.use('/', router);
 require('./server/routes/routes')(app, passport, express);
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){

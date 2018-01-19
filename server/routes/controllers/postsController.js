@@ -1,7 +1,7 @@
 import { Posts } from '../../config/database';
 import mongoose from 'mongoose';
 
-import { postsUpdated } from '../../../client/app/actions/posts';
+import { postsUpdated, sendPostsHaveErroredMessage } from '../../../client/app/actions/posts';
 
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -154,6 +154,7 @@ exports.render_server_data = function(req, res) {
             // handle error
             if(err) {
                 console.log(err);
+                return store.dispatch(sendPostsHaveErroredMessage('Could not load posts'));
             }
             store.dispatch(postsUpdated(posts));
             let data = store.getState();
