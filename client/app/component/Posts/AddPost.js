@@ -110,7 +110,7 @@ class AddPost extends Component {
     render() {
         // show error message for user if it is props
         let errorMessage;
-        if(this.props.newPostHasErrorred) {
+        if(this.props.newPostHasErrorred.length > 1) {
             errorMessage = <p className="error-message">{this.props.newPostHasErrorred}</p>;
         }
         // if there is no user, redirect to home
