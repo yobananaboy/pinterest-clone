@@ -37,6 +37,10 @@ a {
   .nav-links a {
     margin-left: 20px; }
 
+#twitter-logo {
+  width: 1em;
+  height: 1em; }
+
 .add-post-form-wrapper {
   width: 60%;
   margin: 0 auto;

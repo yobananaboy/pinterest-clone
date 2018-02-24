@@ -20,7 +20,7 @@ class Header extends Component {
 	
 	render() {
 		let navlinks = <div className="nav-links">
-							<a href="/auth/twitter">{emoji("Log in 🐦 ")}</a>
+							<a href="/auth/twitter">Log in <img src="./public/images/Twitter_Logo_WhiteOnBlue.png" alt="Twitter logo" id="twitter-logo" /></a>
 						</div>;
 		if(this.props.user) {
 			navlinks = <div className="nav-links">
