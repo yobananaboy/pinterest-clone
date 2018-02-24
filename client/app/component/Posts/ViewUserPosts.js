@@ -24,10 +24,10 @@ class ViewUserPosts extends Component {
             }
         });
         // posts will show as loading by default
-        let posts = <div class="loader">Loading...</div>;
+        let posts = <div className="loader">Loading...</div>;
         // if posts have errored, display error message
         if(this.props.postsHaveErrored) {
-            posts = <div class="error-message" id="view-posts-error-message">{this.props.postsHaveErrored}</div>;
+            posts = <div className="error-message" id="view-posts-error-message">{this.props.postsHaveErrored}</div>;
         }
         // if posts are not loading and there's not error message, must have loaded okay, so display them
         if(!this.props.postsHaveErrored && !this.props.postsAreLoading) {

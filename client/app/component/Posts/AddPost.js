@@ -18,7 +18,7 @@ class AddPost extends Component {
     }
     
     componentDidMount() {
-        this.props.sendNewPostHasErrorredMessage(null);
+        this.props.sendNewPostHasErrorredMessage('');
     }
 
     handleChange(e) {
@@ -54,7 +54,7 @@ class AddPost extends Component {
         // test image url
         this.testImage(this.state.url, (testURL, result) => {
             if (result == "success") {
-                this.props.sendNewPostHasErrorredMessage(null);
+                this.props.sendNewPostHasErrorredMessage('');
                 // you can submit the form now
                 // add new post, sending user and info about post
                 this.props.addNewPost(this.props.user, {
@@ -122,11 +122,11 @@ class AddPost extends Component {
                 <div className="add-post-form-wrapper">
                     <form onSubmit={this.handleSubmit} className="add-post-form">
                         <p>Please provide an image url and (optional) caption to post your image.</p>
-                    	<div class="form-group">
+                    	<div className="form-group">
                 		    <label>Image URL *</label> <input className="add-post-input" name="url" type="text" value={this.state.url} id="url-input" onChange={this.handleChange} placeholder="Please provide a url" />
                         </div>
-                        <div class="form-group">
-                		    <label>Caption</label> <input className="add-post-input" name="caption" type="text" value={this.state.caption} maxlength="30" id="caption-input" onChange={this.handleChange} placeholder="Please provide a caption" />
+                        <div className="form-group">
+                		    <label>Caption</label> <input className="add-post-input" name="caption" type="text" value={this.state.caption} maxLength="30" id="caption-input" onChange={this.handleChange} placeholder="Please provide a caption" />
                         </div>
                         {errorMessage}
                         <button className={buttonClass} type="submit">Add post</button>
