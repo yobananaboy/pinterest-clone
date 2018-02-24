@@ -6,11 +6,9 @@ require('babel-register')({
 require('dotenv').config();
 
 var http = require('http');
-var path = require('path');
 
 var express = require('express');
 
-// var router = require('./server/routes/router');
 
 var session = require('express-session');
 var passport = require('passport');
@@ -18,8 +16,6 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 
 var app = express();
-
-app.engine('pug', require('pug').__express)
 
 // Initialize Passport session
 app.use(session({
@@ -40,7 +36,6 @@ app.set('view engine', 'ejs');
 
 var server = http.createServer(app);
 
-// app.use('/', router);
 require('./server/routes/routes')(app, passport, express);
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
