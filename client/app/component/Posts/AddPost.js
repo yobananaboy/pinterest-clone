@@ -18,7 +18,7 @@ class AddPost extends Component {
     }
     
     componentDidMount() {
-        this.props.sendPostsHaveErroredMessage("");
+        this.props.sendNewPostHasErrorredMessage("");
     }
 
     handleChange(e) {
@@ -54,7 +54,7 @@ class AddPost extends Component {
         // test image url
         this.testImage(this.state.url, (testURL, result) => {
             if (result == "success") {
-                this.props.sendPostsHaveErroredMessage("");
+                this.props.sendNewPostHasErrorredMessage("");
                 // you can submit the form now
                 // add new post, sending user and info about post
                 this.props.addNewPost(this.props.user, {
