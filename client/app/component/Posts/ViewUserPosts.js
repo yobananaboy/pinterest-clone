@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Masonry from 'react-masonry-component';
 import Post from './Post';
+import { Redirect } from 'react-router-dom';
 
 var masonryOptions = {
     transitionDuration: 700
@@ -12,6 +13,9 @@ class ViewUserPosts extends Component {
     }
     
     render() {
+        if(!this.props.user) {
+            return <Redirect to='/' />;
+        }
         // get display to know whether you are showing all posts or user's posts
         let display = this.props.postsToDisplay;
         // create post list to add posts to

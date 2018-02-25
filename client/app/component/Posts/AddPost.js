@@ -115,7 +115,7 @@ class AddPost extends Component {
         }
         // if there is no user, redirect to home
         if(!this.props.user) {
-            <Redirect to='/' />;
+            return <Redirect to='/' />;
         }
         let buttonClass = classNames('add-post-button', {show: !this.state.newPostLoading});
         return(
