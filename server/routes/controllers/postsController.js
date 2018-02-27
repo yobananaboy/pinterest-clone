@@ -2,6 +2,7 @@ import { Posts } from '../../config/database';
 import mongoose from 'mongoose';
 
 import { postsUpdated, sendPostsHaveErroredMessage } from '../../../client/app/actions/posts';
+import { userUpdated } from '../../../client/app/actions/user';
 
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -150,6 +151,11 @@ exports.like_post = function(req, res) {
 };
 
 exports.render_server_data = function(req, res) {
+    	if (typeof req.user != "undefined") {
+    	    store.dispatch((userUpdated(req.user)));
+    	} else {
+    	    store.dispatch((userUpdated(false)));
+    	}
         Posts.find({}, function(err, posts) {
             // handle error
             if(err) {
