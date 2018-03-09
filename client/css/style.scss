@@ -215,51 +215,6 @@ transform: rotate(360deg);
 
 // MOBILE
 @media (max-width: 320px) {
-    // TOP NAV
-    .nav {
-        width: 100%;
-        font-size: 1em;
-    }
-    .nav-wide {
-        display: none;
-    }
-    .nav-mobile {
-        padding: 0.5em 0.4em;
-        display: block;
-    }
-    .mobile-links {
-        display: none;
-        width: 100%;
-        &.show {
-            display: inline-block;
-        }
-    }
-    .nav-links {
-        width: 100%;
-        float: left;
-        a {
-            display: block;
-            margin-left: 0px;
-            margin-top: 1em;
-        }
-    }
-    #burger {
-        padding-left: 40px;
-        float: right;
-    }
-    // ADD NEW POST FORM
-    .add-post-form-wrapper {
-        width: 70%;    
-    }
-    label {
-        display: block;
-        width: 60%;
-    }
-    input {
-        margin-top: 1em;
-        display: block;
-        width: 60%;
-    }
     // POST GALLERY
     .post-gallery, .intro {
         margin: 0 auto;
@@ -309,5 +264,53 @@ transform: rotate(360deg);
     .post {
         width: 18%;
         margin: 1%;
+    }
+}
+
+@media (max-width: 992px) {
+    // TOP NAV
+    .nav {
+        width: 100%;
+        font-size: 1em;
+    }
+    .nav-wide {
+        display: none;
+    }
+    .nav-mobile {
+        padding: 0.5em 0.4em;
+        display: block;
+    }
+    .mobile-links {
+        display: none;
+        width: 100%;
+        &.show {
+            display: inline-block;
+        }
+    }
+    .nav-links {
+        width: 100%;
+        float: left;
+        a {
+            display: block;
+            margin-left: 0px;
+            margin-top: 1em;
+        }
+    }
+    #burger {
+        padding-left: 40px;
+        float: right;
+    }
+    // ADD NEW POST FORM
+    .add-post-form-wrapper {
+        width: 70%;    
+    }
+    label {
+        display: block;
+        width: 60%;
+    }
+    input {
+        margin-top: 1em;
+        display: block;
+        width: 60%;
     }
 }
