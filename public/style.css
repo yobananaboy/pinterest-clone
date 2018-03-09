@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato);body {
   font-family: 'Lato', sans-serif;
+  color: #212121;
   margin: 0;
   background-color: #4caf50;
   box-sizing: border-box; }
@@ -86,7 +87,12 @@ input:invalid {
 .error-message {
   color: #d32f2f; }
 
-.post-gallery {
+.intro {
+  background-color: #fafafa;
+  padding: 0.5em 1em 1em 1em;
+  border-radius: 3px; }
+
+.post-gallery, .intro {
   margin: 0 auto;
   width: 80%; }
 
@@ -202,7 +208,7 @@ img {
     margin-top: 1em;
     display: block;
     width: 60%; }
-  .post-gallery {
+  .post-gallery, .intro {
     margin: 0 auto;
     width: 95%; }
   img {
@@ -213,6 +219,8 @@ img {
 @media (min-width: 321px) and (max-width: 576px) {
   .post-gallery {
     width: 100%; }
+  .intro {
+    width: 95%; }
   .post {
     width: 48%;
     margin: 1%; } }
@@ -220,12 +228,14 @@ img {
 @media (min-width: 577px) and (max-width: 720px) {
   .post-gallery {
     width: 100%; }
+  .intro {
+    width: 95%; }
   .post {
     width: 23%;
     margin: 1%; } }
 
 @media (min-width: 721px) and (max-width: 992px) {
-  .post-gallery {
+  .post-gallery, .intro {
     width: 90%; }
   .post {
     width: 18%;

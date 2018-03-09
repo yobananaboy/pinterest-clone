@@ -15,6 +15,7 @@ $white: #fafafa;
  
 body {
     font-family: 'Lato', sans-serif;
+    color: $black;
     margin: 0;
     background-color: $backgroundgreen;
     box-sizing: border-box
@@ -109,8 +110,14 @@ input:invalid {
 .error-message {
     color: $red;
 }
+// INTRO 
+.intro {
+    background-color: $white;
+    padding: 0.5em 1em 1em 1em;
+    border-radius: 3px;
+}
 // POST GALLERY
-.post-gallery {
+.post-gallery, .intro {
     margin: 0 auto;
     width: 80%;
 }
@@ -254,7 +261,7 @@ transform: rotate(360deg);
         width: 60%;
     }
     // POST GALLERY
-    .post-gallery {
+    .post-gallery, .intro {
         margin: 0 auto;
         width: 95%;
     }
@@ -271,6 +278,9 @@ transform: rotate(360deg);
     .post-gallery {
         width: 100%;
     }
+    .intro {
+        width: 95%;
+    }
     .post {
         width: 48%;
         margin: 1%;
@@ -282,6 +292,9 @@ transform: rotate(360deg);
     .post-gallery {
         width: 100%;
     }
+    .intro {
+        width: 95%;
+    }
     .post {
         width: 23%;
         margin: 1%;
@@ -290,7 +303,7 @@ transform: rotate(360deg);
 
 // LARGE SCREENS
 @media (min-width: 721px) and (max-width: 992px) {
-    .post-gallery {
+    .post-gallery, .intro {
         width: 90%;
     }
     .post {

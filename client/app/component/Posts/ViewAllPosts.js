@@ -15,6 +15,17 @@ class ViewAllPosts extends Component {
         // get display to know whether you are showing all posts or user's posts
         let display = this.props.postsToDisplay;
         let postList = [];
+        
+        let loginmessage = !this.props.user ? <p>Log in via Twitter to add your own posts and like other users' posts.</p> : false;
+        
+        let intro = (
+            <div className="intro">
+                <h1>All posts</h1>
+                <p>Welcome to Matt's image sharing social media network.</p>
+                {loginmessage}
+            </div>
+            );
+        
         // loop through posts and add posts to post list depending on display
         this.props.posts.forEach((post, index) => {
             if(post.active) {
@@ -26,16 +37,25 @@ class ViewAllPosts extends Component {
         let posts = <div className="loader">Loading...</div>;
         // if posts have errored, display error message
         if(this.props.postsHaveErrored) {
-            posts = <div className="error-message" id="view-posts-error-message">{this.props.postsHaveErrored}</div>;
+            posts = (
+                <div>
+                {intro}
+                    <div className="error-message" id="view-posts-error-message">
+                        {this.props.postsHaveErrored}
+                    </div>
+                </div>
+                );
         }
         // if posts are not loading and there's not error message, must have loaded okay, so display them
         if(!this.props.postsHaveErrored && !this.props.postsAreLoading) {
-            posts = <Masonry
-                        className={'post-gallery'}
-                        options={masonryOptions}
-                    >
-                        {postList}
-                    </Masonry>;            
+            posts = (
+                <Masonry
+                    className={'post-gallery'}
+                    options={masonryOptions}
+                >
+                    {postList}
+                </Masonry>       
+                );
         }
         // if there are no posts, let user know
         // check length of posts first. If it is 0 then must be no posts
@@ -51,7 +71,8 @@ class ViewAllPosts extends Component {
         }
         return(
             <div>
-                posts
+                {intro}
+                {posts}
             </div>
             );
     }

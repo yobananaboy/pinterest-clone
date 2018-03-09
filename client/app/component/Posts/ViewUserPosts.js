@@ -16,10 +16,21 @@ class ViewUserPosts extends Component {
         if(!this.props.user) {
             return <Redirect to='/' />;
         }
+        
+        let intro = (
+            <div className="intro">
+                <h1>All posts</h1>
+                <p>Here are the posts you have added to the network.</p>
+                <p>You can delete or restore any of the posts that you have added.</p>
+            </div>
+            );
+        
         // get display to know whether you are showing all posts or user's posts
         let display = this.props.postsToDisplay;
+        
         // create post list to add posts to
         let postList = [];
+        
         // loop through posts and add posts to post list depending on display
         this.props.posts.forEach((post, index) => {
             // display all user posts
@@ -55,7 +66,10 @@ class ViewUserPosts extends Component {
             }
         }
         return(
-            posts
+            <div>
+                {intro}
+                {posts}
+            </div>
             );
     }
 }
