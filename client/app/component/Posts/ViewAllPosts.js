@@ -50,7 +50,9 @@ class ViewAllPosts extends Component {
             }
         }
         return(
-            posts
+            <div>
+                posts
+            </div>
             );
     }
 }
