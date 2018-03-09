@@ -176,38 +176,6 @@ img {
   text-align: center; }
 
 @media (max-width: 320px) {
-  .nav {
-    width: 100%;
-    font-size: 1em; }
-  .nav-wide {
-    display: none; }
-  .nav-mobile {
-    padding: 0.5em 0.4em;
-    display: block; }
-  .mobile-links {
-    display: none;
-    width: 100%; }
-    .mobile-links.show {
-      display: inline-block; }
-  .nav-links {
-    width: 100%;
-    float: left; }
-    .nav-links a {
-      display: block;
-      margin-left: 0px;
-      margin-top: 1em; }
-  #burger {
-    padding-left: 40px;
-    float: right; }
-  .add-post-form-wrapper {
-    width: 70%; }
-  label {
-    display: block;
-    width: 60%; }
-  input {
-    margin-top: 1em;
-    display: block;
-    width: 60%; }
   .post-gallery, .intro {
     margin: 0 auto;
     width: 95%; }
@@ -240,3 +208,37 @@ img {
   .post {
     width: 18%;
     margin: 1%; } }
+
+@media (max-width: 992px) {
+  .nav {
+    width: 100%;
+    font-size: 1em; }
+  .nav-wide {
+    display: none; }
+  .nav-mobile {
+    padding: 0.5em 0.4em;
+    display: block; }
+  .mobile-links {
+    display: none;
+    width: 100%; }
+    .mobile-links.show {
+      display: inline-block; }
+  .nav-links {
+    width: 100%;
+    float: left; }
+    .nav-links a {
+      display: block;
+      margin-left: 0px;
+      margin-top: 1em; }
+  #burger {
+    padding-left: 40px;
+    float: right; }
+  .add-post-form-wrapper {
+    width: 70%; }
+  label {
+    display: block;
+    width: 60%; }
+  input {
+    margin-top: 1em;
+    display: block;
+    width: 60%; } }
