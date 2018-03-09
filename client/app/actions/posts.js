@@ -85,7 +85,6 @@ export const deleteRestorePost = (post) => {
 };
 
 export const likePost = (user, post) => {
-    console.log('liking post');
     return(dispatch) => {
         axios.post(likePostUrl, {
             user,

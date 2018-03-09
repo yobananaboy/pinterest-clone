@@ -1,5 +1,6 @@
 import { Posts } from '../../config/database';
 import mongoose from 'mongoose';
+mongoose.Promise = require('bluebird');
 
 import { postsUpdated, sendPostsHaveErroredMessage } from '../../../client/app/actions/posts';
 import { userUpdated } from '../../../client/app/actions/user';
@@ -17,23 +18,47 @@ import routes from '../../../client/app/routes/routes';
 
 const store = configureStore();
 
+const savePost = (req, res, post) => {
+    post.save({})
+        .then(result => {
+            getAllPostsAndSendData(req, res);
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({err: true});
+        });
+};
+
+const getAllPostsAndSendData = (req, res) => {
+    Posts.find({})
+        .then(posts => {
+            res.json({
+                success: true,
+                posts
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({err: true});
+        });
+};
+
 // find all posts
 exports.get_all_posts = function(req, res) {
     console.log('getting posts');
     // find all posts on database
-    Posts.find({}, function(err, posts) {
-        // handle error
-        if(err) {
-            return res.json(
-                {err: true}
-                );
-        }
-        // send all posts if not error
-        res.json({
-            success: true,
-            posts    
+    Posts.find({})
+        .then(posts => {
+            // send all posts
+            res.json({
+                success: true,
+                posts    
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({err: true});
         });
-    });
 };
 
 // add a new post
@@ -56,57 +81,20 @@ exports.add_new_post = function(req, res) {
     newPost.active = true;
     
     // save new post to databse
-    newPost.save(function(err) {
-        // handle err
-        if(err) {
-            return res.json({
-                err: true
-            });
-        }
-        // get all posts and send to user
-        Posts.find({}, function(err, posts) {
-            if(err) {
-                return res.json({
-                    err: true
-                });
-            }
-            return res.json({
-                success: true,
-                posts
-            });
-        });
-    });
+    savePost(req, res, newPost);
 };
 
 exports.toggle_post = function(req, res) {
     let post = req.body.post;
-    Posts.findOne({ '_id': post._id }, function(err, postOnDb) {
-        if(err) {
-            return res.json({
-                err: true
-            });
-        }
-        postOnDb.active = !postOnDb.active;
-        postOnDb.save(function(err) {
-            if(err) {
-                return res.json({
-                    err: 'post',
-                    post
-                });
-            }
-            Posts.find({}, function(err, posts) {
-                if(err) {
-                    return res.json({
-                        err: 'loading'
-                    });
-                }
-                res.json({
-                    success: true,
-                    posts
-                });
-            });
+    Posts.findOne({ '_id': post._id })
+        .then(postOnDb => {
+            postOnDb.active = !postOnDb.active;
+            savePost(req, res, postOnDb);
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({err: true});
         });
-    });
 };
 
 exports.like_post = function(req, res) {
@@ -115,55 +103,27 @@ exports.like_post = function(req, res) {
     // get info about post user has made
     let post = req.body.post;
     
-    Posts.findOne({ _id: post._id }, (err, postOnDb) => {
-        if(err) {
-            return res.json({
-                error: true
-            });
-        }
-        // check is user has liked post already by seeing if they are in array of likers.
-        // If they are, remove them. If not, add them.
-        let index = postOnDb.likes.indexOf(user._id);
-        if(index !== -1) {
-            postOnDb.likes.splice(index, 1);
-        } else {
-            postOnDb.likes.push(user._id);
-        }
-        postOnDb.save(err => {
-            if(err) {
-                return res.json({
-                    error: true
-                });
+    Posts.findOne({ _id: post._id })
+        .then(postOnDb => {
+            // check is user has liked post already by seeing if they are in array of likers.
+            // If they are, remove them. If not, add them.
+            let index = postOnDb.likes.indexOf(user._id); 
+            if(index !== -1) {
+                postOnDb.likes.splice(index, 1);
+            } else {
+                postOnDb.likes.push(user._id);
             }
-            Posts.find({}, (err, posts) => {
-                if(err) {
-                    return res.json({
-                        error: true
-                    });
-                }
-                res.json({
-                    success: true,
-                    posts
-                });
-            });
+            savePost(req, res, postOnDb);
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({err: true});
         });
-    });
 };
 
 exports.render_server_data = function(req, res) {
-    	if (typeof req.user != "undefined") {
-    	    store.dispatch((userUpdated(req.user)));
-    	} else {
-    	    store.dispatch((userUpdated(false)));
-    	}
-        Posts.find({}, function(err, posts) {
-            // handle error
-            if(err) {
-                console.log(err);
-                return store.dispatch(sendPostsHaveErroredMessage('Could not load posts'));
-            }
-            store.dispatch(postsUpdated(posts));
-            let data = store.getState();
+    	const renderData = () => {
+    	    let data = store.getState();
             let context = {};
             const content = renderToString(
               <Provider store={store}>
@@ -176,5 +136,17 @@ exports.render_server_data = function(req, res) {
               res.status(404);
             }
             res.render('index', {title: 'Express', data: JSON.stringify(data), content });
-        });
+    	};
+    	
+    	typeof req.user != "undefined" ? store.dispatch((userUpdated(req.user))) : store.dispatch((userUpdated(false)));
+        Posts.find({})
+            .then(posts => {
+                store.dispatch(postsUpdated(posts));
+                renderData();
+            })
+            .catch(err => {
+               console.log(err);
+               store.dispatch(sendPostsHaveErroredMessage('Could not load posts'));
+               renderData();
+            });
 };
