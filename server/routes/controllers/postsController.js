@@ -108,11 +108,7 @@ exports.like_post = function(req, res) {
             // check is user has liked post already by seeing if they are in array of likers.
             // If they are, remove them. If not, add them.
             let index = postOnDb.likes.indexOf(user._id); 
-            if(index !== -1) {
-                postOnDb.likes.splice(index, 1);
-            } else {
-                postOnDb.likes.push(user._id);
-            }
+            index !== -1 ? postOnDb.likes.splice(index, 1) : postOnDb.likes.push(user._id);
             savePost(req, res, postOnDb);
         })
         .catch(err => {
